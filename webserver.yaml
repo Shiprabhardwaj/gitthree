@@ -1,0 +1,18 @@
+---
+
+- hosts: webserver
+  become: true
+  tasks:
+  - name: logic test
+    file: path=/home/user/logic.txt state=touch
+    when: ansible_hostname == 'ansible2'
+  tasks:
+  - name: first task
+    apt: name=apache2 state=present
+
+  - name: creating user
+    service: name=apache2 state=started enabled=yes
+
+  - name: third task
+    shell: echo shipra > /var/www/html/inidex.html
+       
